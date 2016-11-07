@@ -39,6 +39,9 @@ public class CSVReader {
 		//If debug output final arrayList
 		if(debug){printArrayList(fullData);}
 		
+		//Sample for get element using the test file
+		//System.out.println(getElement(fullData.get(0), "Last"));
+		
 	}
 
 	public static ArrayList<String[]> readCSV(String CSVLocation){
@@ -102,6 +105,24 @@ public class CSVReader {
 		}
 		LOGGER.exiting(className, LOGGER.getParent().toString());
 		return storedCSV;
+	}
+	
+	public static String getElement(String[] list, String element){
+		//This method allows you to retrieve elements by their header name allowing you to not have to hard code element positions and the header can be dynamic if more columns are added
+		return list[getPosition(element)];
+	}
+	
+	private static int getPosition(String element){
+		int result = 0;
+		int counter = 0;
+		for(String tempElement:header){
+			if(null!=tempElement && tempElement.length()>1 && tempElement.equals(element)){
+				result = counter;
+				break;
+			}
+			counter++;
+		}
+		return result;
 	}
 	
 	private static void printArrayList(ArrayList<String[]> fullData){
