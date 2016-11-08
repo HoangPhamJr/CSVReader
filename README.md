@@ -14,6 +14,7 @@ line 37: ArrayList<String[]> fullData = readCSV("");
 API Reference
 
 public static ArrayList<String[]> readCSV(String CSVLocation) - This method takes in a string containing the full path of the CSV file
+public static String getElement(String[] list, String element) - This method takes in a String[] and a String of one of the elements in the header, and it will return the corresponding element in the given list
 
 Tests
 
