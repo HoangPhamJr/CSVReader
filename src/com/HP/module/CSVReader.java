@@ -48,15 +48,16 @@ public class CSVReader {
 		LOGGER.entering(className, LOGGER.getParent().toString());
 		//ArrayList to store the csv file
 		ArrayList<String[]> storedCSV = new ArrayList<String[]>();
-		
+		Scanner processLine = new Scanner(System.in);
+		BufferedReader fileReader = null;
 		//Try reading the file
 		try {
 			//Process each line
-			BufferedReader fileReader = new BufferedReader(new FileReader(new File(CSVLocation)));
+			fileReader = new BufferedReader(new FileReader(new File(CSVLocation)));
 			String readLine = fileReader.readLine();
 			
 			//Process the data
-			Scanner processLine = new Scanner(readLine).useDelimiter(",");
+			processLine = new Scanner(readLine).useDelimiter(",");
 			String[] data = new String[columns];
 			int row = 0;
 			while(null!=readLine){//Process each row
@@ -102,6 +103,13 @@ public class CSVReader {
 		} catch (IOException e) {
 			e.printStackTrace();
 			printLine("Line reading error in fileReader.readLine()",2);
+		}finally{
+			processLine.close();
+			try {
+				fileReader.close();
+			} catch (IOException e) {//Not initialized
+				e.printStackTrace();
+			}
 		}
 		LOGGER.exiting(className, LOGGER.getParent().toString());
 		return storedCSV;
